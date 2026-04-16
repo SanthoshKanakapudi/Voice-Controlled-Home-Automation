@@ -1,0 +1,164 @@
+#define BLYNK_TEMPLATE_ID "TMPL74T8C6Ac"
+#define BLYNK_TEMPLATE_NAME "Quickstart Template"
+#define BLYNK_AUTH_TOKEN "__VkcgYtNzUaEwNH7DJAusyudefDZ9aK"
+
+#include <ESP8266WiFi.h>
+#include <BlynkSimpleEsp8266.h>
+
+#include <FS.h>
+#include <WiFiManager.h>
+
+#include <SoftwareSerial.h>
+SoftwareSerial abc(D1, D2);
+
+BLYNK_WRITE(V0)
+{
+  int p = param.asInt();
+  if (p == 1)
+  {
+    abc.println("1");
+  }
+  if (p == 0)
+  {
+    abc.println("2");
+  }
+}
+BLYNK_WRITE(V1)
+{
+  int p = param.asInt();
+  if (p == 1)
+  {
+    abc.println("3");
+  }
+  if (p == 0)
+  {
+    abc.println("4");
+  }
+}
+BLYNK_WRITE(V2)
+{
+  int p = param.asInt();
+  if (p == 1)
+  {
+    abc.println("5");
+  }
+  if (p == 0)
+  {
+    abc.println("6");
+  }
+}
+BLYNK_WRITE(V3)
+{
+  int p = param.asInt();
+  if (p == 0)
+  {
+    abc.println("7");
+  }
+  if (p == 1)
+  {
+    abc.println("8");
+  }
+  if (p == 2)
+  {
+    abc.println("9");
+  }
+  if (p == 3)
+  {
+    abc.println("10");
+  }
+  if (p == 4)
+  {
+    abc.println("11");
+  }
+  if (p == 5)
+  {
+    abc.println("12");
+  }
+  if (p == 6)
+  {
+    abc.println("13");
+  }
+  if (p == 7)
+  {
+    abc.println("14");
+  }
+  if (p == 8)
+  {
+    abc.println("15");
+  }
+  if (p == 9)
+  {
+    abc.println("16");
+  }
+
+}
+void setup()
+{
+  Serial.begin(115200);
+  abc.begin(9600);
+  Serial.println();
+  WiFiManager wifiManager;
+  wifiManager.setBreakAfterConfig(true);
+  if (!wifiManager.autoConnect("AutoConnectAP", "password")) {
+    Serial.println("failed to connect, we should reset as see if it connects");
+    delay(3000);
+    ESP.restart();
+    delay(5000);
+  }
+  Serial.println("connected...yeey :)");
+  Serial.println("local ip");
+  Serial.println(WiFi.localIP());
+  const char* ssid = WiFi.SSID().c_str();
+  const char* pass = WiFi.psk().c_str();
+  Blynk.begin(BLYNK_AUTH_TOKEN, ssid, pass);
+}
+void loop()
+{
+  Blynk.run();
+}
+
+For Arduino UNO
+
+#include <SoftwareSerial.h>
+int led1=7;
+int led2=8;
+int fan=9;
+void setup() {
+  Serial.begin(9600);
+  pinMode(led1,OUTPUT);
+  pinMode(led2,OUTPUT);
+  pinMode(fan,OUTPUT);
+  servoMotor.attach(servoPin);
+}
+void loop() {
+  while(Serial.available()>0)
+  {
+    int a=Serial.parseInt();
+    Serial.println(a);
+    if(a==1)
+    {
+      digitalWrite(led1,HIGH);
+    }
+    if(a==2)
+    {
+      digitalWrite(led1,LOW);
+    }
+    if(a==3)
+    {
+      digitalWrite(led2,HIGH);
+    }
+    if(a==4)
+    {
+      digitalWrite(led2,LOW);
+    }
+    if(a==5)
+    {
+      digitalWrite(fan,HIGH);
+    }
+    if(a==6)
+    {
+      digitalWrite(fan,LOW);
+    }
+    Serial.print("\n");
+  }
+}
