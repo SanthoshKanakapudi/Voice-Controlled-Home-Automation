@@ -1,4 +1,4 @@
-#Voice Controlled Home Automation
+# Voice Controlled Home Automation
 
 A realtime voice controlled Home Automation project successfully demonstrated using technologies like Arduino, ESP8266 integrated with Google Assistant via IFTTT Applet webhooks, Blynk Cloud and Bluetooth control
 This Project aims for Voice automation in both Offline and Online environments.
